@@ -59,8 +59,8 @@ window.onload = function () {
         document.getElementById('downloadFileBtn').addEventListener('click', function () {
             // Create a link element for downloading
             var downloadLink = document.createElement('a');
-            downloadLink.href = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
-            downloadLink.download = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
+            downloadLink.href = 'RBI-Grade-B-Descriptive-Simulator.zip'; // Replace 'filename.txt' with the actual filename
+            downloadLink.download = 'RBI-Grade-B-Descriptive-Simulator.zip'; // Replace 'filename.txt' with the actual filename
     
             // Append the link to the document and trigger the download
             document.body.appendChild(downloadLink);
