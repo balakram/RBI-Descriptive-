@@ -145,7 +145,8 @@ button {
 }
 
 .download-btn:hover {
-    background-color: #2980b9; /* Change the background color on hover */
+    background-color: #a50000; /* Change the background color on hover */
+    font-weight: bold;
 }
 
 
