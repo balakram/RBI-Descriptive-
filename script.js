@@ -19,6 +19,15 @@ window.onload = function () {
         startSimulator();
     });
 
+        // Check if the device is a phone
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Display an alert recommending to open on desktop
+        alert("For the best experience, it is recommended to use a desktop device.");
+
+        // You can also redirect the user to a mobile-friendly page if needed
+        // window.location.href = 'mobile-friendly.html';
+    }
+
     // Function to start the simulator (replace with your logic)
     /*function startSimulator() {
         // Add your existing simulator initialization logic here
