@@ -35,4 +35,4 @@ This simulator is created solely for educational purposes and is not affiliated 
 Contributions are welcome! If you have ideas for improvement or would like to contribute to the project, feel free to open an issue or submit a pull request.
 
 ## License
-This project is open-source and available under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
+This project is open-source and available under the [MIT License](LICENSE).
