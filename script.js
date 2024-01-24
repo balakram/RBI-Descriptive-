@@ -55,6 +55,21 @@ window.onload = function () {
         }, 1000);
     }
 
+            // Event listener for the "Download File" button
+        document.getElementById('downloadFileBtn').addEventListener('click', function () {
+            // Create a link element for downloading
+            var downloadLink = document.createElement('a');
+            downloadLink.href = 'filename.txt'; // Replace 'filename.txt' with the actual filename
+            downloadLink.download = 'filename.txt'; // Replace 'filename.txt' with the actual filename
+    
+            // Append the link to the document and trigger the download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+    
+            // Remove the link element from the document
+            document.body.removeChild(downloadLink);
+        });
+
     //These event listeners use window.location.href to navigate to the specified HTML pages when the buttons are clicked.
     document.getElementById('precisBtn').addEventListener('click', function () {
         window.location.href = 'precis.html';
