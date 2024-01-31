@@ -18,15 +18,14 @@ window.onload = function () {
         // Call the function to start the simulator or any other initialization logic
         startSimulator();
     });
-
         // Check if the device is a phone
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        // Display an alert recommending to open on desktop
-        alert("For the best experience, it is recommended to use a desktop device.");
-
-        // You can also redirect the user to a mobile-friendly page if needed
-        // window.location.href = 'mobile-friendly.html';
-    }
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Display an alert recommending to open on desktop
+            alert("For the best experience, it is recommended to use a desktop device.");
+    
+            // You can also redirect the user to a mobile-friendly page if needed
+            // window.location.href = 'mobile-friendly.html';
+        }
 
     // Function to start the simulator (replace with your logic)
     /*function startSimulator() {
@@ -46,7 +45,7 @@ window.onload = function () {
         }, 1000);
     }*/
 
-    function startSimulator() {
+    /*function startSimulator() {
         // Get the selected time limit in seconds
         var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
     
@@ -62,22 +61,29 @@ window.onload = function () {
             // Update the timer display
             document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
         }, 1000);
-    }
+    }*/
 
-            // Event listener for the "Download File" button
-        document.getElementById('downloadFileBtn').addEventListener('click', function () {
-            // Create a link element for downloading
-            var downloadLink = document.createElement('a');
-            downloadLink.href = 'RBI-Grade-B-Descriptive-Simulator.zip'; // Replace 'filename.txt' with the actual filename
-            downloadLink.download = 'RBI-Grade-B-Descriptive-Simulator.zip'; // Replace 'filename.txt' with the actual filename
+    function startSimulator() {
+        // Get the selected time limit in seconds
+        var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
     
-            // Append the link to the document and trigger the download
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+        // Start the timer when the simulator begins
+        startTimer();
     
-            // Remove the link element from the document
-            document.body.removeChild(downloadLink);
-        });
+        // Add your existing simulator initialization logic here
+    
+        var timer = setInterval(function () {
+            selectedTimeLimit--;
+            if (selectedTimeLimit <= 0) {
+                // Time is over, automatically submit the response
+                submitResponse();
+                clearInterval(timer);
+            }
+            // Update the timer display
+            document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
+        }, 1000);
+    }
+    
 
     //These event listeners use window.location.href to navigate to the specified HTML pages when the buttons are clicked.
     document.getElementById('precisBtn').addEventListener('click', function () {
@@ -118,6 +124,23 @@ window.onload = function () {
         hiddenElement.download = 'myFile.txt';
         hiddenElement.click();
     }
+
+        // Event listener for the "Download File" button
+        document.getElementById('downloadFileBtn').addEventListener('click', function () {
+            // Create a link element for downloading
+            var downloadLink = document.createElement('a');
+            downloadLink.href = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
+            downloadLink.download = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
+    
+            // Append the link to the document and trigger the download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+    
+            // Remove the link element from the document
+            document.body.removeChild(downloadLink);
+        });
+
+        
 
     // Add event listeners for question navigation buttons
     document.getElementById('prevBtn').addEventListener('click', function () {
@@ -172,10 +195,9 @@ window.onload = function () {
             }
     
                 // Function to submit the response
-                function submitResponse() {
+                /*function submitResponse() {
                     var userResponse = document.getElementById('textArea').value;
                     var questionContent = document.getElementById('textQuestion').value;
-
                     // Show alert with content
                     var alertMessage = 'Question:\n\n' + questionContent + '\n\nAnswer:\n\n' + userResponse;
                     var isConfirmed = confirm(alertMessage);
@@ -196,7 +218,65 @@ window.onload = function () {
                         // Remove the link element from the document
                         document.body.removeChild(downloadLink);
                     }
-                }
+                }*/
+
+                // Start the timer when the page loads
+                let startTime;
+
+                    function startTimer() {
+                        startTime = new Date();
+                    }
+
+                    function stopTimer() {
+                        if (!startTime) {
+                            return 'Timer not started';
+                        }
+
+                        const endTime = new Date();
+                        const timeTaken = (endTime - startTime) / 1000;
+                        const minutes = Math.floor(timeTaken / 60);
+                        const seconds = Math.floor(timeTaken % 60);
+                        return `${minutes} m :${seconds < 10 ? '0' : ''}${seconds} s`;
+                        }
+
+
+
+                // Function to submit the response
+                    function submitResponse() {
+                        var userResponse = document.getElementById('textArea').value;
+                        var questionContent = document.getElementById('textQuestion').value;
+
+                        // Get the time left and word count
+                    // var timeLeft = document.getElementById('timer').innerText.split(': ')[1];
+                        var wordCount = document.getElementById('wordCount').innerText.split(': ')[1];
+
+                            // Get the time taken
+                            const timeTaken = stopTimer();
+
+                        // Show alert with content
+                        var alertMessage = 'Question:\n' + questionContent + '\n\nAnswer:\n' + userResponse + '\n\nWord Count: ' + wordCount + '\nTime taken: ' + timeTaken;
+
+                        var isConfirmed = confirm(alertMessage);
+
+                        if (isConfirmed) {
+                            // Create a Blob with the response content
+                            var blob = new Blob(['Question:\n' + questionContent + '\n\n' + '\n\nAnswer:\n' + userResponse + '\n\n'
+                                                + '\n\nWord Count: ' + wordCount  + '\n\nTime Taken: ' + timeTaken], { type: 'text/plain' });
+
+                            // Create a link element for downloading
+                            var downloadLink = document.createElement('a');
+                            downloadLink.href = window.URL.createObjectURL(blob);
+                            downloadLink.download = 'response.txt';
+
+                            // Append the link to the document and trigger the download
+                            document.body.appendChild(downloadLink);
+                            downloadLink.click();
+
+                            // Remove the link element from the document
+                            document.body.removeChild(downloadLink);
+                        }
+                    }
+
 
            // Function to handle keydown events in the textarea
             function handleKeyDown(event) {
@@ -207,9 +287,4 @@ window.onload = function () {
                 event.preventDefault();
             }
         }
-
-
-
-    
-
 };

@@ -38,7 +38,7 @@ window.onload = function () {
         }, 1000);
     }*/
     
-    function startSimulator() {
+    /*function startSimulator() {
         // Get the selected time limit in seconds
         var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
     
@@ -54,7 +54,29 @@ window.onload = function () {
             // Update the timer display
             document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
         }, 1000);
+    }*/
+
+    function startSimulator() {
+        // Get the selected time limit in seconds
+        var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
+    
+        // Start the timer when the simulator begins
+        startTimer();
+    
+        // Add your existing simulator initialization logic here
+    
+        var timer = setInterval(function () {
+            selectedTimeLimit--;
+            if (selectedTimeLimit <= 0) {
+                // Time is over, automatically submit the response
+                submitResponse();
+                clearInterval(timer);
+            }
+            // Update the timer display
+            document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
+        }, 1000);
     }
+    
 
         //These event listeners use window.location.href to navigate to the specified HTML pages when the buttons are clicked.
         document.getElementById('homeBtn').addEventListener('click', function () {
@@ -148,9 +170,29 @@ window.onload = function () {
                     event.preventDefault();
                 }
             }
+
+                            // Start the timer when the page loads
+                            let startTime;
+
+                            function startTimer() {
+                                startTime = new Date();
+                            }
+        
+                            function stopTimer() {
+                                if (!startTime) {
+                                    return 'Timer not started';
+                                }
+        
+                                const endTime = new Date();
+                                const timeTaken = (endTime - startTime) / 1000;
+                                const minutes = Math.floor(timeTaken / 60);
+                                const seconds = Math.floor(timeTaken % 60);
+                                return `${minutes} m :${seconds < 10 ? '0' : ''}${seconds} s`;
+                                }
+        
     
                 // Function to submit the response
-                function submitResponse() {
+              /*  function submitResponse() {
                     var userResponse = document.getElementById('textArea').value;
                     var questionContent = document.getElementById('textQuestion').value;
 
@@ -174,7 +216,43 @@ window.onload = function () {
                         // Remove the link element from the document
                         document.body.removeChild(downloadLink);
                     }
-                }
+                }*/
+
+                                // Function to submit the response
+                                function submitResponse() {
+                                    var userResponse = document.getElementById('textArea').value;
+                                    var questionContent = document.getElementById('textQuestion').value;
+            
+                                    // Get the time left and word count
+                                // var timeLeft = document.getElementById('timer').innerText.split(': ')[1];
+                                    var wordCount = document.getElementById('wordCount').innerText.split(': ')[1];
+            
+                                        // Get the time taken
+                                        const timeTaken = stopTimer();
+            
+                                    // Show alert with content
+                                    var alertMessage = 'Question:\n' + questionContent + '\n\nAnswer:\n' + userResponse + '\n\nWord Count: ' + wordCount + '\nTime taken: ' + timeTaken;
+            
+                                    var isConfirmed = confirm(alertMessage);
+            
+                                    if (isConfirmed) {
+                                        // Create a Blob with the response content
+                                        var blob = new Blob(['Question:\n' + questionContent + '\n\n' + '\n\nAnswer:\n' + userResponse + '\n\n'
+                                                            + '\n\nWord Count: ' + wordCount  + '\n\nTime Taken: ' + timeTaken], { type: 'text/plain' });
+            
+                                        // Create a link element for downloading
+                                        var downloadLink = document.createElement('a');
+                                        downloadLink.href = window.URL.createObjectURL(blob);
+                                        downloadLink.download = 'Precis.txt';
+            
+                                        // Append the link to the document and trigger the download
+                                        document.body.appendChild(downloadLink);
+                                        downloadLink.click();
+            
+                                        // Remove the link element from the document
+                                        document.body.removeChild(downloadLink);
+                                    }
+                                }
 
             
 // Function to handle keydown events in the textarea

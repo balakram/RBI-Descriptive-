@@ -124,8 +124,6 @@ main {
     margin-top: 50px;
 }
 
-
-
 button {
     padding: 10px;
     cursor: pointer;
@@ -149,6 +147,10 @@ button {
     font-weight: bold;
 }
 
+#timer {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
 
 footer {
     background-color: #2c3e50;
