@@ -56,9 +56,9 @@ textarea {
 }
 #textQuestion{
     width: 250px;
-    height: 180px;
+    height: 160px;
     margin-bottom: 20px;
-    resize: none; /* Prevent textarea resizing */
+    /*resize: none; /* Prevent textarea resizing */
     overflow-y: scroll; /* Enable vertical scrollbar */
 }
 
