@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Writing Simulator</title>
+    <link rel="stylesheet" href="precis.css">
+</head>
+<body>
+    <header>
+        <h1>Writing Simulator</h1>
+    </header>
+    <div class="container">
+        <div class="text-container">
+            <textarea id="originalText" placeholder="Paste your original text here..."></textarea>
+            <textarea id="Text" placeholder="Write your answer here..." oninput="updateWordCount()"></textarea>
+        </div>
+        <div class="controls">
+            <button onclick="savePrecis()">Save </button>
+            <button onclick="downloadPrecis()">Download </button>
+            <button onclick="startTimer()">Start Timer</button>
+            <button onclick="resetTimer()">Reset Timer</button>
+            <div id="wordCount">Word Count: 0</div>
+            <div id="timer">Timer: 0:00</div>
+        </div>
+        <div id="documentList"></div>
+    </div>
+    <script src="precis.js"></script>
+</body>
+<footer>
+    <p>&copy; 2024 RBI Grade B Writing Simulator</p>
+</footer>
+</html>
