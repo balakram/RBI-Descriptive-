@@ -86,8 +86,8 @@ window.onload = function () {
     
 
     //These event listeners use window.location.href to navigate to the specified HTML pages when the buttons are clicked.
-    document.getElementById('precisBtn').addEventListener('click', function () {
-        window.location.href = 'precis.html';
+    document.getElementById('precissBtn').addEventListener('click', function () {
+        window.location.href = 'preciss.html';
     });
     
     document.getElementById('syllabusBtn').addEventListener('click', function () {
