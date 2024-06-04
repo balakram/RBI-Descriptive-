@@ -18,273 +18,167 @@ window.onload = function () {
         // Call the function to start the simulator or any other initialization logic
         startSimulator();
     });
-        // Check if the device is a phone
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // Display an alert recommending to open on desktop
-            alert("For the best experience, it is recommended to use a desktop device.");
-    
-            // You can also redirect the user to a mobile-friendly page if needed
-            // window.location.href = 'mobile-friendly.html';
-        }
 
-    // Function to start the simulator (replace with your logic)
-    /*function startSimulator() {
-        // Add your existing simulator initialization logic here
+    // Check if the device is a phone
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Display an alert recommending to open on desktop
+        alert("For the best experience, it is recommended to use a desktop device.");
 
-        // Set the time limit in seconds (e.g., 1500 seconds for 5 minutes)
-        var timeLimit = 1500;
-        var timer = setInterval(function () {
-            timeLimit--;
-            if (timeLimit <= 0) {
-                // Time is over, automatically submit the response
-                submitResponse();
-                clearInterval(timer);
-            }
-            // Update the timer display
-            document.getElementById('timer').innerText = 'Time Left: ' + formatTime(timeLimit);
-        }, 1000);
-    }*/
-
-    /*function startSimulator() {
-        // Get the selected time limit in seconds
-        var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
-    
-        // Add your existing simulator initialization logic here
-    
-        var timer = setInterval(function () {
-            selectedTimeLimit--;
-            if (selectedTimeLimit <= 0) {
-                // Time is over, automatically submit the response
-                submitResponse();
-                clearInterval(timer);
-            }
-            // Update the timer display
-            document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
-        }, 1000);
-    }*/
-
-    function startSimulator() {
-        // Get the selected time limit in seconds
-        var selectedTimeLimit = parseInt(document.getElementById('timeLimitSelect').value);
-    
-        // Start the timer when the simulator begins
-        startTimer();
-    
-        // Add your existing simulator initialization logic here
-    
-        var timer = setInterval(function () {
-            selectedTimeLimit--;
-            if (selectedTimeLimit <= 0) {
-                // Time is over, automatically submit the response
-                submitResponse();
-                clearInterval(timer);
-            }
-            // Update the timer display
-            document.getElementById('timer').innerText = 'Time Left: ' + formatTime(selectedTimeLimit);
-        }, 1000);
+        // You can also redirect the user to a mobile-friendly page if needed
+        // window.location.href = 'mobile-friendly.html';
     }
-    
 
-    //These event listeners use window.location.href to navigate to the specified HTML pages when the buttons are clicked.
+    // Event listeners for the navigation buttons
     document.getElementById('precissBtn').addEventListener('click', function () {
-        window.location.href = 'precis.html';
+        window.location.href = 'preciss.html';
     });
-    
+
     document.getElementById('syllabusBtn').addEventListener('click', function () {
         window.location.href = 'syllabus.html';
     });
-    
-    // Function to format time in MM:SS format
-    function formatTime(seconds) {
-        var minutes = Math.floor(seconds / 60);
-        var remainingSeconds = seconds % 60;
-        return pad(minutes) + ':' + pad(remainingSeconds);
-    }
 
-    // Function to pad single-digit numbers with leading zero
-    function pad(val) {
-        var valString = val + '';
-        if (valString.length < 2) {
-            return '0' + valString;
-        } else {
-            return valString;
-        }
-    }
+    // Event listener for the "Download File" button
+    document.getElementById('downloadFileBtn').addEventListener('click', function () {
+        // Create a link element for downloading
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
+        downloadLink.download = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
 
-    // Function to submit the response
-    function submitResponse() {
-        var userResponse = document.getElementById('textArea').value;
-        alert('Response submitted:\n\n' + userResponse);
-        // You can save the response to a server or perform further actions here.
-        var textToSave = document.getElementById('textArea').value;
-        var hiddenElement = document.createElement('a');
+        // Append the link to the document and trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
 
-        hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = 'myFile.txt';
-        hiddenElement.click();
-    }
-
-        // Event listener for the "Download File" button
-        document.getElementById('downloadFileBtn').addEventListener('click', function () {
-            // Create a link element for downloading
-            var downloadLink = document.createElement('a');
-            downloadLink.href = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
-            downloadLink.download = 'RBI_DESCRIPTIVE.zip'; // Replace 'filename.txt' with the actual filename
-    
-            // Append the link to the document and trigger the download
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-    
-            // Remove the link element from the document
-            document.body.removeChild(downloadLink);
-        });
-
-        
-
-    // Add event listeners for question navigation buttons
-    document.getElementById('prevBtn').addEventListener('click', function () {
-        navigateQuestion(-1);
+        // Remove the link element from the document
+        document.body.removeChild(downloadLink);
     });
-
-    document.getElementById('nextBtn').addEventListener('click', function () {
-        navigateQuestion(1);
-    });
-
-    function navigateQuestion(direction) {
-        currentQuestion += direction;
-        updateNavigationButtons();
-        // Perform additional logic for question navigation if needed
-    }
-
-    function updateNavigationButtons() {
-        document.getElementById('prevBtn').disabled = currentQuestion === 1;
-        document.getElementById('nextBtn').disabled = currentQuestion === totalQuestions;
-    }
-
-    // Add scroll event listener to update scroll position
-    var textarea = document.getElementById('textArea');
-    textarea.addEventListener('scroll', function () {
-        var scrollPosition = textarea.scrollTop;
-        document.getElementById('scrollPosition').innerText = scrollPosition;
-    });
-
-    document.getElementById('textArea').addEventListener('input', updateWordCount);
-    document.getElementById('textArea').addEventListener('keydown', handleKeyDown);
-
-    document.getElementById('submitBtn').addEventListener('click', function () {
-        submitResponse();
-    });
-
-        // Function to update word count
-        function updateWordCount() {
-            var text = document.getElementById('textArea').value;
-            var words = text.match(/\S+/g);
-            var wordCount = words ? words.length : 0;
-            document.getElementById('wordCount').innerText = 'Words: ' + wordCount;
-        }
-    
-        document.getElementById('textArea').addEventListener('input', updateWordCount);
-
-        // Function to handle keydown events in the textarea
-            function handleKeyDown(event) {
-                // Check for consecutive spaces and ignore extra spaces after a space
-                if (event.key === ' ' && event.target.value.endsWith(' ')) {
-                    event.preventDefault();
-                }
-            }
-    
-                // Function to submit the response
-                /*function submitResponse() {
-                    var userResponse = document.getElementById('textArea').value;
-                    var questionContent = document.getElementById('textQuestion').value;
-                    // Show alert with content
-                    var alertMessage = 'Question:\n\n' + questionContent + '\n\nAnswer:\n\n' + userResponse;
-                    var isConfirmed = confirm(alertMessage);
-
-                    if (isConfirmed) {
-                        // Create a Blob with the response content
-                        var blob = new Blob(['Question:\n\n' + questionContent + '\n\n' + '\n\nAnswer:\n\n' + userResponse], { type: 'text/plain' });
-
-                        // Create a link element for downloading
-                        var downloadLink = document.createElement('a');
-                        downloadLink.href = window.URL.createObjectURL(blob);
-                        downloadLink.download = 'response.txt';
-
-                        // Append the link to the document and trigger the download
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-
-                        // Remove the link element from the document
-                        document.body.removeChild(downloadLink);
-                    }
-                }*/
-
-                // Start the timer when the page loads
-                let startTime;
-
-                    function startTimer() {
-                        startTime = new Date();
-                    }
-
-                    function stopTimer() {
-                        if (!startTime) {
-                            return 'Timer not started';
-                        }
-
-                        const endTime = new Date();
-                        const timeTaken = (endTime - startTime) / 1000;
-                        const minutes = Math.floor(timeTaken / 60);
-                        const seconds = Math.floor(timeTaken % 60);
-                        return `${minutes} m :${seconds < 10 ? '0' : ''}${seconds} s`;
-                        }
-
-
-
-                // Function to submit the response
-                    function submitResponse() {
-                        var userResponse = document.getElementById('textArea').value;
-                        var questionContent = document.getElementById('textQuestion').value;
-
-                        // Get the time left and word count
-                    // var timeLeft = document.getElementById('timer').innerText.split(': ')[1];
-                        var wordCount = document.getElementById('wordCount').innerText.split(': ')[1];
-
-                            // Get the time taken
-                            const timeTaken = stopTimer();
-
-                        // Show alert with content
-                        var alertMessage = 'Question:\n' + questionContent + '\n\nAnswer:\n' + userResponse + '\n\nWord Count: ' + wordCount + '\nTime taken: ' + timeTaken;
-
-                        var isConfirmed = confirm(alertMessage);
-
-                        if (isConfirmed) {
-                            // Create a Blob with the response content
-                            var blob = new Blob(['Question:\n' + questionContent + '\n\n' + '\n\nAnswer:\n' + userResponse + '\n\n'
-                                                + '\n\nWord Count: ' + wordCount  + '\n\nTime Taken: ' + timeTaken], { type: 'text/plain' });
-
-                            // Create a link element for downloading
-                            var downloadLink = document.createElement('a');
-                            downloadLink.href = window.URL.createObjectURL(blob);
-                            downloadLink.download = 'response.txt';
-
-                            // Append the link to the document and trigger the download
-                            document.body.appendChild(downloadLink);
-                            downloadLink.click();
-
-                            // Remove the link element from the document
-                            document.body.removeChild(downloadLink);
-                        }
-                    }
-
-
-           // Function to handle keydown events in the textarea
-            function handleKeyDown(event) {
-            // Check for consecutive spaces and ignore extra spaces after a space
-            if (event.key === ' ' && event.target.value.endsWith(' ')) {
-                event.preventDefault();
-            } else if (event.key === 'Enter' && /\s/.test(event.target.value.slice(-1))) {
-                event.preventDefault();
-            }
-        }
 };
+
+// New codes
+let timerInterval;
+let elapsedSeconds = 0;
+let timerStarted = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadPrecis();
+
+    // Add event listeners for restrictions
+    const Text = document.getElementById('Text');
+    Text.addEventListener('input', handleInputRestrictions);
+    Text.addEventListener('keydown', handleKeyRestrictions);
+    Text.addEventListener('input', startTimerAutomatically);
+});
+
+function savePrecis() {
+    const originalText = document.getElementById('originalText').value;
+    const Text = document.getElementById('Text').value;
+    const wordCount = Text.trim().split(/\s+/).length;
+
+    if (!originalText || !Text) {
+        alert('Please enter both the original text and the précis.');
+        return;
+    }
+
+    const timeTaken = elapsedSeconds;
+    const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
+    documentList.push({ originalText, Text, wordCount, timeTaken });
+    localStorage.setItem('documentList', JSON.stringify(documentList));
+
+    document.getElementById('originalText').value = '';
+    document.getElementById('Text').value = '';
+
+    loadPrecis();
+    resetTimer();
+}
+
+function loadPrecis() {
+    const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
+    const documentListDiv = document.getElementById('documentList');
+    documentListDiv.innerHTML = '';
+
+    documentList.forEach((precis, index) => {
+        const precisDiv = document.createElement('div');
+        precisDiv.className = 'precis';
+        precisDiv.innerHTML = `
+            <h3>Question:</h3><br>
+            <p>${precis.originalText}</p>
+            <h3>Answer:</h3><br>
+            <p>${precis.Text}</p>
+            <p><strong>Word Count:</strong> ${precis.wordCount}</p>
+            <p><strong>Time Taken:</strong> ${Math.floor(precis.timeTaken / 60)}:${String(precis.timeTaken % 60).padStart(2, '0')}</p>
+            <button onclick="deletePrecis(${index})">Delete</button>
+        `;
+        documentListDiv.appendChild(precisDiv);
+    });
+}
+
+function deletePrecis(index) {
+    const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
+    documentList.splice(index, 1);
+    localStorage.setItem('documentList', JSON.stringify(documentList));
+    loadPrecis();
+}
+
+function downloadPrecis() {
+    const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
+    if (documentList.length === 0) {
+        alert('No précis available to download.');
+        return;
+    }
+
+    let content = '';
+    documentList.forEach(precis => {
+        content += `Question:\n\n${precis.originalText}\n\n\nAnswer:\n\n${precis.Text}\n\n\nWord Count: ${precis.wordCount}\nTime Taken: ${Math.floor(precis.timeTaken / 60)}:${String(precis.timeTaken % 60).padStart(2, '0')}\n\n---\n\n`;
+    });
+
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'document_list.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function updateWordCount() {
+    const Text = document.getElementById('Text').value;
+    const wordCount = Text.trim().split(/\s+/).length;
+    document.getElementById('wordCount').textContent = `Word Count: ${wordCount}`;
+}
+
+function startTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    elapsedSeconds = 0;
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        document.getElementById('timer').textContent = `Timer: ${Math.floor(elapsedSeconds / 60)}:${String(elapsedSeconds % 60).padStart(2, '0')}`;
+    }, 1000);
+}
+
+function resetTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    elapsedSeconds = 0;
+    timerStarted = false;
+    document.getElementById('timer').textContent = `Timer: 0:00`;
+}
+
+function handleInputRestrictions(event) {
+    const Text = event.target.value;
+    event.target.value = Text.replace(/ {2,}/g, ' ');
+}
+
+function handleKeyRestrictions(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+}
+
+function startTimerAutomatically() {
+    if (!timerStarted) {
+        startTimer();
+        timerStarted = true;
+    }
+}
