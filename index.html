@@ -9,32 +9,17 @@
 </head>
 <body>
     <!-- Login Page -->
-    
-    <div id="loginPage" style="text-align: center; ">
+    <div id="loginPage" style="text-align: center;">
         <header>
             <h1>RBI Grade B Descriptive Writing Simulator</h1>
         </header>
-    
-            <h2 style="margin: 100px;">Welcome! Please enter your name to begin:</h2>
-       
-        
-        <!--<p>Please enter your name to begin:</p>-->
-        <input type="text" id="userNameInput" placeholder="Enter your name" style="width: 300px; height: 30px; " >
-        <label for="timeLimitSelect">Choose Time Limit:</label>
-        <select id="timeLimitSelect">
-            <option value="1500">25 minutes</option>
-            <option value="1080">18 minutes</option>
-            <option value="2700">45 minutes</option>
-            <!-- Add more options as needed -->
-        </select>
-    
+        <h2 style="margin: 100px;">Welcome! Please enter your name to begin:</h2>
+        <input type="text" id="userNameInput" placeholder="Enter your name" style="width: 300px; height: 30px;">
         <br><br>
-        
         <button id="startSimulatorBtn">Start Simulator</button>
         <button id="precissBtn" style="background-color: blueviolet;">Precis</button>
         <button id="syllabusBtn" style="background-color: rgb(9, 95, 42);">Syllabus</button>
-         <button id="downloadFileBtn" class="download-btn">Download File</button>
-
+        <button id="downloadFileBtn" class="download-btn">Download File</button>
         <footer>
             <p>&copy; 2024 RBI Grade B Writing Simulator</p>
         </footer>
@@ -42,82 +27,35 @@
 
     <!-- Main Page -->
     <div id="mainPage" style="display: none;">
-        
-        <!-- The rest of your existing HTML content for the main page -->
         <header>
-        
-            <h1> RBI Grade B Descriptive Writing Simulator</h1>
+            <h2 id="welcomeMessage"></h2>
         </header>
-        <main>
-            <div id="instructions">
-                <h2>Instructions</h2>
-                <p>➲ Descriptive - 6 Questions (to be attempted - 4).</p>
-                <p>➲ 400 Words, 10 marks.</p>
-                <p>➲ 600 words, 15 Marks.</p>
-              
-                <div id="Questions">
-                    <h2>Questions</h2>
-                    <textarea id="textQuestion" placeholder="Your text question here..."></textarea>
-                </div>
-                
-                <div class="question-navigation" style=" float: bottom right;
-                width: 100%;
-                margin-right: 0px;
-                margin-top: 35%;
-                overflow:auto;">
-                   <button id="prevBtn" disabled>Previous</button>
-                    <br> <br> 
-                    <button id="nextBtn">Next</button>
-                 
-                </div> 
+        <div class="container">
+            <div class="text-container">
+                <textarea id="originalText" placeholder="Paste your original text here..."></textarea>
+                <textarea id="Text" placeholder="Write your answer here..." oninput="updateWordCount()"></textarea>
             </div>
-           
-            <div class="textarea-container">
-                <textarea id="textArea" placeholder="Start writing answer here..."></textarea>
-                <div id="wordCount">Words: 0</div>
+            <div class="controls">
+                <button onclick="savePrecis()">Save</button>
+                <button onclick="downloadPrecis()">Download</button>
+                <button onclick="startTimer()">Start Timer</button>
+                <button onclick="resetTimer()">Reset Timer</button>
+                <div id="wordCount">Word Count: 0</div>
+                <div id="timer">Timer: 0:00</div>
             </div>
             <div id="options-section" style="display: flexbox;">
                 <div>
-                    <p id="welcomeMessage">Welcome</p>
-                </div>
-                <div id="timer">Time left: <span id="time"></span></div>
-                <br><br>
-                
-                <div class="question-options">
-                    <h2>Choose Option</h2>
-                    <label>
-                        <input type="button" name="questionOptions" value="A" style=" float: bottom right;
-                        width: 20%;
-                        margin-right: 0px;
-                        overflow:auto;
-                        background-color: #3da8f0;">
-                       
-                    </label>
-                    <label>
-                        <input type="button" name="questionOptions" value="B" style=" float: bottom right;
-                        width: 20%;
-                        margin-right: 10px;
-                        margin-left: 20px;
-                        overflow:auto;
-                        background-color: #3da8f0;">
-                        
-                    </label>
-                </div>
-                
-                <div id="submit-section"  style="margin-top:120%;">
-                    <button id="submitBtn">Submit</button>
+                    <p id="welcomeMessage"></p>
                 </div>
             </div>
-    
-        </main>
+            <div id="documentList"></div>
+        </div>
         <footer>
             <p>&copy; 2024 RBI Grade B Writing Simulator</p>
         </footer>
-
     </div>
 
     <!-- Include your existing script.js and script content here -->
-
     <script src="script.js"></script>
 </body>
 </html>
