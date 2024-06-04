@@ -29,9 +29,9 @@ window.onload = function () {
     }
 
     // Event listeners for the navigation buttons
-    document.getElementById('precissBtn').addEventListener('click', function () {
-        window.location.href = 'preciss.html';
-    });
+    //*document.getElementById('precissBtn').addEventListener('click', function () {
+       // window.location.href = 'preciss.html';
+   // });*//
 
     document.getElementById('syllabusBtn').addEventListener('click', function () {
         window.location.href = 'syllabus.html';
