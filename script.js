@@ -2,6 +2,7 @@ window.onload = function () {
     // Display the login page initially
     document.getElementById('loginPage').style.display = 'block';
     document.getElementById('mainPage').style.display = 'none';
+    
 
     // Event listener for the "Start Simulator" button
     document.getElementById('startSimulatorBtn').addEventListener('click', function () {
@@ -29,9 +30,9 @@ window.onload = function () {
     }
 
     // Event listeners for the navigation buttons
-    //*document.getElementById('precissBtn').addEventListener('click', function () {
-       // window.location.href = 'preciss.html';
-   // });*//
+   // document.getElementById('precissBtn').addEventListener('click', function () {
+       // window.location.href = 'precis.html';
+   // });
 
     document.getElementById('syllabusBtn').addEventListener('click', function () {
         window.location.href = 'syllabus.html';
@@ -74,7 +75,7 @@ function savePrecis() {
     const wordCount = Text.trim().split(/\s+/).length;
 
     if (!originalText || !Text) {
-        alert('Please enter both the Question text and the Answer.');
+        alert('Please enter both the original text and the précis.');
         return;
     }
 
@@ -121,7 +122,7 @@ function deletePrecis(index) {
 function downloadPrecis() {
     const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
     if (documentList.length === 0) {
-        alert('No text available to download.');
+        alert('No précis available to download.');
         return;
     }
 
