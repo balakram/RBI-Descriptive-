@@ -74,7 +74,7 @@ function savePrecis() {
     const wordCount = Text.trim().split(/\s+/).length;
 
     if (!originalText || !Text) {
-        alert('Please enter both the original text and the précis.');
+        alert('Please enter both the Question text and the Answer.');
         return;
     }
 
@@ -121,7 +121,7 @@ function deletePrecis(index) {
 function downloadPrecis() {
     const documentList = JSON.parse(localStorage.getItem('documentList')) || [];
     if (documentList.length === 0) {
-        alert('No précis available to download.');
+        alert('No text available to download.');
         return;
     }
 
