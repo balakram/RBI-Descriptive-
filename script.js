@@ -14,7 +14,7 @@ window.onload = function () {
         document.getElementById('mainPage').style.display = 'block';
 
         // Display a welcome message with the user's name
-        document.getElementById('welcomeMessage').innerText = 'All The Best ' + userName + ' !';
+        document.getElementById('welcomeMessage').innerText = 'All The Best ' + userName + ' ! 👍';
 
         // Call the function to start the simulator or any other initialization logic
         startSimulator();
