@@ -100,9 +100,9 @@ function loadPrecis() {
         const precisDiv = document.createElement('div');
         precisDiv.className = 'precis';
         precisDiv.innerHTML = `
-            <h3>Question:</h3><br>
+            <h3>Question:</h3>
             <p>${precis.originalText}</p>
-            <h3>Answer:</h3><br>
+            <h3>Answer:</h3>
             <p>${precis.Text}</p>
             <p><strong>Word Count:</strong> ${precis.wordCount}</p>
             <p><strong>Time Taken:</strong> ${Math.floor(precis.timeTaken / 60)}:${String(precis.timeTaken % 60).padStart(2, '0')}</p>
